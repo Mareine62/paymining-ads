@@ -1,0 +1,701 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="theme-color" content="#111827">
+    <title>Paymining Ads</title>
+
+    <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: Arial, sans-serif;
+            background: #f3f4f6;
+            color: #111827;
+            line-height: 1.5;
+        }
+
+        header {
+            background: linear-gradient(135deg, #111827, #312e81);
+            color: white;
+            padding: 24px 18px;
+        }
+
+        .header-content {
+            max-width: 1000px;
+            margin: auto;
+        }
+
+        .brand {
+            font-size: 25px;
+            font-weight: bold;
+        }
+
+        .brand span {
+            color: #a5b4fc;
+        }
+
+        header p {
+            margin-top: 8px;
+            color: #e5e7eb;
+            font-size: 14px;
+        }
+
+        nav {
+            display: flex;
+            gap: 8px;
+            overflow-x: auto;
+            padding: 12px;
+            background: white;
+            border-bottom: 1px solid #e5e7eb;
+            position: sticky;
+            top: 0;
+            z-index: 10;
+        }
+
+        nav button {
+            flex-shrink: 0;
+            border: 0;
+            padding: 10px 14px;
+            border-radius: 8px;
+            background: #f3f4f6;
+            color: #374151;
+            font-weight: bold;
+            cursor: pointer;
+        }
+
+        nav button.active {
+            background: #4f46e5;
+            color: white;
+        }
+
+        main {
+            max-width: 1000px;
+            margin: auto;
+            padding: 20px 14px 40px;
+        }
+
+        .notice {
+            background: #fffbeb;
+            color: #92400e;
+            border: 1px solid #fde68a;
+            padding: 13px;
+            border-radius: 10px;
+            font-size: 13px;
+            margin-bottom: 22px;
+        }
+
+        .page {
+            display: none;
+        }
+
+        .page.active {
+            display: block;
+        }
+
+        h2 {
+            font-size: 23px;
+            margin-bottom: 8px;
+        }
+
+        .subtitle {
+            color: #6b7280;
+            margin-bottom: 20px;
+            font-size: 14px;
+        }
+
+        .hero {
+            padding: 24px;
+            border-radius: 16px;
+            background: linear-gradient(135deg, #4338ca, #7c3aed);
+            color: white;
+            margin-bottom: 22px;
+        }
+
+        .hero h2 {
+            font-size: 27px;
+            margin-bottom: 10px;
+        }
+
+        .hero p {
+            color: #ede9fe;
+            margin-bottom: 18px;
+        }
+
+        .button {
+            display: inline-block;
+            border: 0;
+            border-radius: 9px;
+            padding: 12px 16px;
+            font-size: 14px;
+            font-weight: bold;
+            cursor: pointer;
+            text-decoration: none;
+        }
+
+        .button-primary {
+            background: #4f46e5;
+            color: white;
+        }
+
+        .hero .button {
+            background: white;
+            color: #4338ca;
+        }
+
+        .button-secondary {
+            background: #e5e7eb;
+            color: #111827;
+        }
+
+        .stats {
+            display: grid;
+            grid-template-columns: repeat(2, minmax(0, 1fr));
+            gap: 12px;
+            margin-bottom: 24px;
+        }
+
+        .stat, .card {
+            background: white;
+            padding: 17px;
+            border-radius: 12px;
+            border: 1px solid #e5e7eb;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.03);
+        }
+
+        .stat p {
+            color: #6b7280;
+            font-size: 13px;
+        }
+
+        .stat strong {
+            display: block;
+            font-size: 25px;
+            margin-top: 5px;
+            overflow-wrap: anywhere;
+        }
+
+        .section-heading {
+            margin: 24px 0 14px;
+        }
+
+        .cards {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 14px;
+        }
+
+        .ad-label {
+            display: inline-block;
+            background: #eef2ff;
+            color: #4338ca;
+            padding: 4px 9px;
+            border-radius: 6px;
+            font-size: 11px;
+            font-weight: bold;
+            margin-bottom: 10px;
+        }
+
+        .card h3 {
+            font-size: 18px;
+            margin-bottom: 8px;
+        }
+
+        .card p {
+            color: #6b7280;
+            font-size: 14px;
+            margin-bottom: 14px;
+            overflow-wrap: anywhere;
+        }
+
+        .card .button {
+            margin: 3px 4px 3px 0;
+        }
+
+        .form-card {
+            background: white;
+            border: 1px solid #e5e7eb;
+            border-radius: 12px;
+            padding: 18px;
+            margin-top: 18px;
+        }
+
+        label {
+            display: block;
+            font-size: 14px;
+            font-weight: bold;
+            margin: 14px 0 6px;
+        }
+
+        input, textarea, select {
+            width: 100%;
+            padding: 12px;
+            border: 1px solid #d1d5db;
+            border-radius: 8px;
+            background: white;
+            font: inherit;
+            font-size: 14px;
+        }
+
+        textarea {
+            min-height: 85px;
+            resize: vertical;
+        }
+
+        .form-card .button {
+            margin-top: 16px;
+        }
+
+        .message {
+            margin-top: 12px;
+            font-size: 14px;
+            color: #047857;
+            overflow-wrap: anywhere;
+        }
+
+        .empty {
+            background: white;
+            border: 1px dashed #cbd5e1;
+            padding: 22px;
+            border-radius: 10px;
+            color: #6b7280;
+            text-align: center;
+        }
+
+        .campaign-item {
+            border-left: 4px solid #6366f1;
+            margin-bottom: 12px;
+        }
+
+        .status {
+            display: inline-block;
+            border-radius: 20px;
+            padding: 4px 9px;
+            background: #fef3c7;
+            color: #92400e;
+            font-size: 11px;
+            font-weight: bold;
+            margin-bottom: 8px;
+        }
+
+        footer {
+            text-align: center;
+            color: #6b7280;
+            font-size: 12px;
+            padding: 25px 12px;
+        }
+
+        @media (min-width: 650px) {
+            .stats {
+                grid-template-columns: repeat(4, minmax(0, 1fr));
+            }
+
+            .cards {
+                grid-template-columns: repeat(2, minmax(0, 1fr));
+            }
+
+            main {
+                padding: 28px 20px 50px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+<header>
+    <div class="header-content">
+        <div class="brand">Paymining <span>Ads</span></div>
+        <p>Une plateforme pour connecter annonceurs et applications partenaires.</p>
+    </div>
+</header>
+
+<nav aria-label="Navigation principale">
+    <button class="active" data-page="accueil">Accueil</button>
+    <button data-page="annonces">Annonces</button>
+    <button data-page="campagnes">Campagnes</button>
+    <button data-page="annonceur">Annonceur</button>
+    <button data-page="apropos">À propos</button>
+</nav>
+
+<main>
+
+    <div class="notice">
+        MODE DÉMONSTRATION : les annonces et statistiques affichées
+        ci-dessous sont fictives. Aucun revenu réel n'est généré.
+        Ne saisis pas de mot de passe ni d'information bancaire ici.
+    </div>
+
+    <!-- ACCUEIL -->
+    <section class="page active" id="accueil">
+
+        <div class="hero">
+            <h2>Bienvenue sur Paymining Ads</h2>
+            <p>
+                Découvre une nouvelle façon de connecter les entreprises,
+                les annonceurs et les applications partenaires.
+            </p>
+            <button class="button" data-go="annonces">
+                Découvrir les annonces
+            </button>
+        </div>
+
+        <h2>Tableau de bord</h2>
+        <p class="subtitle">
+            Chiffres fictifs destinés à tester l'interface.
+        </p>
+
+        <div class="stats">
+            <div class="stat">
+                <p>Annonces de démonstration</p>
+                <strong id="statAnnonces">3</strong>
+            </div>
+
+            <div class="stat">
+                <p>Campagnes créées</p>
+                <strong id="statCampagnes">0</strong>
+            </div>
+
+            <div class="stat">
+                <p>Clics de test</p>
+                <strong id="statClics">0</strong>
+            </div>
+
+            <div class="stat">
+                <p>Revenus réels</p>
+                <strong>0 FCFA</strong>
+            </div>
+        </div>
+
+        <h2 class="section-heading">Comment ça fonctionne ?</h2>
+
+        <div class="cards">
+            <div class="card">
+                <h3>Pour les annonceurs</h3>
+                <p>
+                    Prépare une campagne pour promouvoir un produit,
+                    un service, un site web ou une application.
+                </p>
+                <button class="button button-primary" data-go="annonceur">
+                    Préparer une campagne
+                </button>
+            </div>
+
+            <div class="card">
+                <h3>Pour les partenaires</h3>
+                <p>
+                    À terme, les développeurs pourront intégrer des
+                    emplacements publicitaires acceptés par leurs utilisateurs.
+                </p>
+                <button class="button button-secondary" data-go="apropos">
+                    En savoir plus
+                </button>
+            </div>
+        </div>
+    </section>
+
+    <!-- ANNONCES -->
+    <section class="page" id="annonces">
+        <h2>Annonces</h2>
+        <p class="subtitle">
+            Voici trois annonces fictives pour tester l'affichage.
+        </p>
+
+        <div class="cards" id="listeAnnonces">
+
+            <article class="card">
+                <span class="ad-label">PUBLICITÉ DE TEST</span>
+                <h3>Application Exemple</h3>
+                <p>
+                    Une annonce fictive pour tester la présentation
+                    d'une application mobile.
+                </p>
+                <button class="button button-primary"
+                    data-demo="Application Exemple">
+                    Voir l'annonce
+                </button>
+            </article>
+
+            <article class="card">
+                <span class="ad-label">PUBLICITÉ DE TEST</span>
+                <h3>Boutique Exemple</h3>
+                <p>
+                    Une annonce fictive pour un commerce qui souhaite
+                    présenter ses produits.
+                </p>
+                <button class="button button-primary"
+                    data-demo="Boutique Exemple">
+                    Voir l'annonce
+                </button>
+            </article>
+
+            <article class="card">
+                <span class="ad-label">PUBLICITÉ DE TEST</span>
+                <h3>Site Web Exemple</h3>
+                <p>
+                    Une annonce fictive pour tester la promotion
+                    d'un site web.
+                </p>
+                <button class="button button-primary"
+                    data-demo="Site Web Exemple">
+                    Voir l'annonce
+                </button>
+            </article>
+
+        </div>
+
+        <p class="message" id="annonceMessage" aria-live="polite"></p>
+    </section>
+
+    <!-- CAMPAGNES -->
+    <section class="page" id="campagnes">
+        <h2>Mes campagnes</h2>
+        <p class="subtitle">
+            Les campagnes créées ici restent uniquement dans cette page
+            pendant la session. Elles ne sont pas encore envoyées à un serveur.
+        </p>
+
+        <div id="listeCampagnes">
+            <div class="empty">
+                Aucune campagne de test créée pour le moment.
+            </div>
+        </div>
+
+        <button class="button button-primary" data-go="annonceur">
+            Créer une campagne
+        </button>
+    </section>
+
+    <!-- ANNONCEUR -->
+    <section class="page" id="annonceur">
+        <h2>Espace annonceur</h2>
+        <p class="subtitle">
+            Remplis ce formulaire pour tester la création d'une campagne.
+        </p>
+
+        <form class="form-card" id="formCampagne">
+            <label for="nomAnnonceur">Nom de l'entreprise ou du projet</label>
+            <input id="nomAnnonceur" type="text"
+                placeholder="Ex. Ma boutique" maxlength="80" required>
+
+            <label for="titreCampagne">Titre de l'annonce</label>
+            <input id="titreCampagne" type="text"
+                placeholder="Ex. Découvrez notre application"
+                maxlength="100" required>
+
+            <label for="descriptionCampagne">Description</label>
+            <textarea id="descriptionCampagne"
+                placeholder="Présente ton produit ou service..."
+                maxlength="500" required></textarea>
+
+            <label for="urlCampagne">Lien de destination (facultatif)</label>
+            <input id="urlCampagne" type="url"
+                placeholder="https://exemple.com">
+
+            <button class="button button-primary" type="submit">
+                Créer la campagne de test
+            </button>
+
+            <p class="message" id="formMessage" aria-live="polite"></p>
+        </form>
+
+        <div class="notice" style="margin-top:18px">
+            Ce formulaire ne facture rien et ne diffuse aucune publicité
+            réelle. Les campagnes nécessiteront une validation, un serveur
+            et un système de paiement sécurisé avant leur lancement.
+        </div>
+    </section>
+
+    <!-- A PROPOS -->
+    <section class="page" id="apropos">
+        <h2>À propos de Paymining Ads</h2>
+
+        <div class="card">
+            <h3>Notre objectif</h3>
+            <p>
+                Construire une plateforme qui permet aux annonceurs de
+                promouvoir leurs produits et aux applications partenaires
+                de proposer des espaces publicitaires.
+            </p>
+
+            <h3>Publicité responsable</h3>
+            <p>
+                Les annonces devront être clairement identifiées,
+                respecter la vie privée et être diffusées dans des
+                emplacements autorisés par l'application partenaire.
+            </p>
+
+            <h3>La suite du projet</h3>
+            <p>
+                Les prochaines étapes seront la création de comptes
+                sécurisés, le stockage des campagnes, la validation des
+                annonceurs, les statistiques côté serveur et l'intégration
+                avec des applications partenaires.
+            </p>
+        </div>
+    </section>
+
+</main>
+
+<footer>
+    Paymining Ads — Version 1.0 de démonstration<br>
+    Aucun revenu publicitaire réel n'est généré par cette version.
+</footer>
+
+<script>
+    "use strict";
+
+    const pages = document.querySelectorAll(".page");
+    const navButtons = document.querySelectorAll("nav button");
+    const campagnes = [];
+    let clicsTest = 0;
+
+    function ouvrirPage(nomPage) {
+        pages.forEach(function(page) {
+            page.classList.toggle("active", page.id === nomPage);
+        });
+
+        navButtons.forEach(function(button) {
+            button.classList.toggle(
+                "active",
+                button.dataset.page === nomPage
+            );
+        });
+
+        window.scrollTo({ top: 0, behavior: "smooth" });
+    }
+
+    navButtons.forEach(function(button) {
+        button.addEventListener("click", function() {
+            ouvrirPage(button.dataset.page);
+        });
+    });
+
+    document.querySelectorAll("[data-go]").forEach(function(button) {
+        button.addEventListener("click", function() {
+            ouvrirPage(button.dataset.go);
+        });
+    });
+
+    document.querySelectorAll("[data-demo]").forEach(function(button) {
+        button.addEventListener("click", function() {
+            clicsTest++;
+
+            document.getElementById("statClics").textContent = clicsTest;
+
+            document.getElementById("annonceMessage").textContent =
+                "Annonce de démonstration consultée : " +
+                button.dataset.demo +
+                ". Ce clic de test ne génère aucun revenu.";
+
+            button.textContent = "Annonce consultée";
+        });
+    });
+
+    document.getElementById("formCampagne").addEventListener(
+        "submit",
+        function(event) {
+            event.preventDefault();
+
+            const nom = document.getElementById("nomAnnonceur").value.trim();
+            const titre = document.getElementById("titreCampagne").value.trim();
+            const description = document.getElementById(
+                "descriptionCampagne"
+            ).value.trim();
+            const url = document.getElementById("urlCampagne").value.trim();
+
+            if (!nom || !titre || !description) {
+                document.getElementById("formMessage").textContent =
+                    "Remplis les champs obligatoires.";
+                return;
+            }
+
+            if (url) {
+                try {
+                    const destination = new URL(url);
+
+                    if (destination.protocol !== "https:" &&
+                        destination.protocol !== "http:") {
+                        throw new Error("Lien invalide");
+                    }
+                } catch (error) {
+                    document.getElementById("formMessage").textContent =
+                        "Entre un lien web valide commençant par https:// ou http://.";
+                    return;
+                }
+            }
+
+            campagnes.push({
+                nom: nom,
+                titre: titre,
+                description: description,
+                url: url
+            });
+
+            afficherCampagnes();
+
+            document.getElementById("statCampagnes").textContent =
+                campagnes.length;
+
+            document.getElementById("formMessage").textContent =
+                "Campagne de test créée sur cette page. Elle n'est pas encore publiée.";
+
+            this.reset();
+        }
+    );
+
+    function afficherCampagnes() {
+        const liste = document.getElementById("listeCampagnes");
+        liste.replaceChildren();
+
+        if (campagnes.length === 0) {
+            const message = document.createElement("div");
+            message.className = "empty";
+            message.textContent =
+                "Aucune campagne de test créée pour le moment.";
+            liste.appendChild(message);
+            return;
+        }
+
+        campagnes.forEach(function(campagne, index) {
+            const carte = document.createElement("article");
+            carte.className = "card campaign-item";
+
+            const statut = document.createElement("span");
+            statut.className = "status";
+            statut.textContent = "BROUILLON DE TEST";
+
+            const titre = document.createElement("h3");
+            titre.textContent = campagne.titre;
+
+            const entreprise = document.createElement("p");
+            entreprise.textContent = "Annonceur : " + campagne.nom;
+
+            const description = document.createElement("p");
+            description.textContent = campagne.description;
+
+            carte.append(statut, titre, entreprise, description);
+
+            if (campagne.url) {
+                const lien = document.createElement("p");
+                lien.textContent = "Lien prévu : " + campagne.url;
+                carte.appendChild(lien);
+            }
+
+            liste.appendChild(carte);
+        });
+    }
+</script>
+<script type="module">
+  import { db } from "./firebase.js";
+
+  console.log("Paymining Ads est connecté au SDK Firebase.");
+  console.log("Base Firestore :", db);
+</script>
+</body>
+</html>
